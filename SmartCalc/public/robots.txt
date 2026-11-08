@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://smartcalc-55t.pages.dev/sitemap.xml
