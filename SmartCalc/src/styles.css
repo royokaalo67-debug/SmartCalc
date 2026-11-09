@@ -21,3 +21,36 @@ h1,h2,h3,p{margin-top:0}.hero h1{font:800 clamp(36px,4.7vw,58px)/1.12 Manrope,sa
 footer{padding:35px clamp(22px,7vw,100px) 27px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}footer p{font-size:11px;color:#8995a8;margin:0 auto 0 0}.footer-brand{font-size:16px}.footer-brand .brand-mark{width:27px;height:27px;font-size:15px;border-radius:8px}.footer-links{display:flex;gap:17px;color:#758299;font-size:10px}footer>small{width:100%;border-top:1px solid #edf0f5;padding-top:17px;color:#a0aaba;font-size:9px}
 @media(max-width:850px){.hero{padding-top:55px;padding-bottom:55px}.hero-art{width:300px;transform:scale(.85);margin:0 -25px}.tool-layout{grid-template-columns:1fr}.tool-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.tool-item{min-height:78px}.section-heading{align-items:start;flex-direction:column}.search-box{width:100%}}
 @media(max-width:600px){.topbar{height:auto;min-height:70px;gap:15px;flex-wrap:wrap;padding-top:13px;padding-bottom:13px}.topbar nav{gap:14px;margin-right:auto}.currency-picker{width:100%;justify-content:space-between}.currency-picker select{flex:1;max-width:none}.hero{display:block;padding-top:48px;padding-bottom:25px}.hero h1{font-size:39px;letter-spacing:-1.8px}.hero-art{height:230px;width:100%;margin:12px 0 0;transform:scale(.78);transform-origin:top center}.trust-line{gap:10px}.workspace{padding-top:52px;padding-bottom:55px}.tool-list{grid-template-columns:1fr}.tool-main{padding:12px}.calculator-panel{padding:16px}.results{grid-template-columns:1fr 1fr}.result-row strong{font-size:16px}.benefits{grid-template-columns:1fr;gap:25px;padding-top:40px;padding-bottom:40px}footer{gap:13px}.footer-links{width:100%;flex-wrap:wrap}.section-heading h2{font-size:25px}}
+
+.calculator-guide {
+  margin-top: 40px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  line-height: 1.8;
+}
+
+.calculator-guide h2 {
+  margin-top: 28px;
+  margin-bottom: 10px;
+}
+
+.calculator-guide h2:first-child {
+  margin-top: 0;
+}
+
+.calculator-guide h3 {
+  margin-top: 20px;
+  margin-bottom: 6px;
+}
+
+.calculator-guide p,
+.calculator-guide li {
+  color: #555;
+}
+
+.calculator-guide ul,
+.calculator-guide ol {
+  padding-left: 24px;
+}

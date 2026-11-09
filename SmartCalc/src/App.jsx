@@ -74,16 +74,18 @@ export function Calculator({ id, currency }) {
 
   const [vatMode, setVatMode] = useState("add");
 
-  if (id === "profit") {
-    const revenue = n("revenue", 1000);
-    const cost = n("cost", 650);
-    const profit = revenue - cost;
-    const margin = revenue > 0 ? (profit / revenue) * 100 : 0;
+  
+if (id === "profit") {
+  const revenue = n("revenue", 1000);
+  const cost = n("cost", 650);
+  const profit = revenue - cost;
+  const margin = revenue > 0 ? (profit / revenue) * 100 : 0;
 
-    return (
+  return (
+    <>
       <CalculatorShell
         title="Profit calculator"
-        intro="Calculate your gross profit and profit margin."
+        intro="Calculate your business profit and profit margin using your sales revenue and total costs."
       >
         <NumberField
           label="Total sales / revenue"
@@ -109,18 +111,98 @@ export function Calculator({ id, currency }) {
           </p>
         )}
       </CalculatorShell>
-    );
-  }
 
-  if (id === "markup") {
-    const cost = n("cost", 500);
-    const markup = n("markup", 30);
-    const selling = cost * (1 + markup / 100);
+      <section className="calculator-guide">
+        <h2>How to calculate profit</h2>
+        <p>
+          Profit is the amount of money remaining after subtracting
+          business costs from total sales revenue. Understanding
+          your profit helps you evaluate business performance and
+          make better financial decisions.
+        </p>
 
-    return (
+        <h2>Profit calculation formula</h2>
+        <p>
+          To calculate profit, subtract your total costs from
+          your total revenue.
+        </p>
+        <p><strong>Profit = Total Revenue − Total Costs</strong></p>
+
+        <h2>How to calculate profit margin</h2>
+        <p>
+          Profit margin measures the percentage of revenue that
+          remains as profit after costs.
+        </p>
+        <p>
+          <strong>
+            Profit Margin = (Profit ÷ Total Revenue) × 100
+          </strong>
+        </p>
+
+        <h2>Practical profit calculation example</h2>
+        <p>
+          Imagine your business generates KES 100,000 in sales
+          and spends KES 65,000 on costs.
+        </p>
+        <ul>
+          <li>Total revenue: KES 100,000</li>
+          <li>Total costs: KES 65,000</li>
+          <li>Profit: KES 35,000</li>
+          <li>Profit margin: 35%</li>
+        </ul>
+
+        <h2>How to use this profit calculator</h2>
+        <ol>
+          <li>Enter your total sales revenue.</li>
+          <li>Enter your total business costs.</li>
+          <li>Select your preferred display currency.</li>
+          <li>View your profit and profit margin instantly.</li>
+        </ol>
+
+        <h2>Frequently asked questions</h2>
+
+        <h3>What is profit?</h3>
+        <p>
+          Profit is the amount remaining when business costs
+          are subtracted from revenue.
+        </p>
+
+        <h3>What is a good profit margin?</h3>
+        <p>
+          A good profit margin depends on your industry,
+          operating costs, competition, and business model.
+          Compare your margin with similar businesses.
+        </p>
+
+        <h3>What happens if costs are higher than revenue?</h3>
+        <p>
+          Your business has made a loss. The calculator displays
+          a negative profit when costs exceed revenue.
+        </p>
+
+        <h3>Can I use this calculator for a small business?</h3>
+        <p>
+          Yes. It can help small businesses, freelancers,
+          entrepreneurs, and shop owners estimate their profit
+          and profit margin.
+        </p>
+      </section>
+    </>
+  );
+}
+
+
+  
+if (id === "markup") {
+  const cost = n("cost", 500);
+  const markup = n("markup", 30);
+  const selling = cost * (1 + markup / 100);
+
+  return (
+    <>
       <CalculatorShell
         title="Markup calculator"
-        intro="Calculate a selling price using a markup percentage."
+        intro="Calculate your product selling price using a markup percentage. Find your markup amount and gross profit margin instantly."
       >
         <NumberField
           label="Product cost"
@@ -147,19 +229,94 @@ export function Calculator({ id, currency }) {
           />
         </div>
       </CalculatorShell>
-    );
-  }
 
-  if (id === "discount") {
-    const price = n("price", 2000);
-    const discount = n("discount", 15);
-    const safeDiscount = Math.min(100, Math.max(0, discount));
-    const savings = (price * safeDiscount) / 100;
+      <section className="calculator-guide">
+        <h2>What is markup?</h2>
+        <p>
+          Markup is the amount added to the cost of a product or
+          service to determine its selling price. Businesses use
+          markup to cover costs and generate profit from sales.
+        </p>
 
-    return (
+        <h2>Markup calculation formula</h2>
+        <p>
+          To calculate markup, multiply the product cost by the
+          markup percentage and add the result to the original cost.
+        </p>
+        <p>
+          <strong>Markup Amount = Product Cost × (Markup Percentage ÷ 100)</strong>
+        </p>
+        <p>
+          <strong>Selling Price = Product Cost + Markup Amount</strong>
+        </p>
+
+        <h2>Practical markup calculation example</h2>
+        <p>
+          Imagine you purchase a product for KES 500 and want
+          to apply a 30% markup.
+        </p>
+        <ul>
+          <li>Product cost: KES 500</li>
+          <li>Markup percentage: 30%</li>
+          <li>Markup amount: KES 150</li>
+          <li>Selling price: KES 650</li>
+          <li>Gross profit margin: 23.08%</li>
+        </ul>
+
+        <h2>How to use this markup calculator</h2>
+        <ol>
+          <li>Enter the cost of your product or service.</li>
+          <li>Enter the markup percentage you want to apply.</li>
+          <li>Select your preferred display currency.</li>
+          <li>View the markup amount and suggested selling price.</li>
+        </ol>
+
+        <h2>Frequently asked questions</h2>
+
+        <h3>What is a good markup percentage?</h3>
+        <p>
+          A suitable markup depends on your industry, operating
+          expenses, competition, and business goals. Compare your
+          pricing with similar products and services.
+        </p>
+
+        <h3>Is markup the same as profit margin?</h3>
+        <p>
+          No. Markup is calculated using the original product cost,
+          while profit margin is calculated using the selling price.
+        </p>
+
+        <h3>How do I calculate a 30% markup?</h3>
+        <p>
+          Multiply the product cost by 0.30 and add that amount
+          to the original cost. For a KES 500 product, the selling
+          price would be KES 650.
+        </p>
+
+        <h3>Can small businesses use this calculator?</h3>
+        <p>
+          Yes. Retailers, wholesalers, shop owners, freelancers,
+          and other entrepreneurs can use it to estimate selling
+          prices.
+        </p>
+      </section>
+    </>
+  );
+}
+
+  
+if (id === "discount") {
+  const price = n("price", 2000);
+  const discount = n("discount", 15);
+  const safeDiscount = Math.min(100, Math.max(0, discount));
+  const savings = (price * safeDiscount) / 100;
+  const finalPrice = price - savings;
+
+  return (
+    <>
       <CalculatorShell
         title="Discount calculator"
-        intro="Find the amount saved and the final price after a discount."
+        intro="Calculate how much you save during a sale and find the final price after applying a percentage discount."
       >
         <NumberField
           label="Original price"
@@ -174,23 +331,98 @@ export function Calculator({ id, currency }) {
         />
         <div className="results">
           <Result label="You save" value={money(savings, currency)} />
-          <Result label="Final price" value={money(price - savings, currency)} />
+          <Result label="Final price" value={money(finalPrice, currency)} />
         </div>
       </CalculatorShell>
-    );
-  }
 
-  if (id === "break-even") {
-    const fixed = n("fixed", 50000);
-    const price = n("price", 500);
-    const variable = n("variable", 250);
-    const contribution = price - variable;
-    const units = contribution > 0 ? Math.ceil(fixed / contribution) : null;
+      <section className="calculator-guide">
+        <h2>What is a discount?</h2>
+        <p>
+          A discount is a reduction in the original selling price
+          of a product or service. Businesses use discounts to
+          attract customers, increase sales, and clear stock.
+          Shoppers use them to reduce their spending.
+        </p>
 
-    return (
+        <h2>Discount calculation formula</h2>
+        <p>
+          Calculate the discount amount by multiplying the
+          original price by the discount percentage.
+        </p>
+        <p>
+          <strong>Discount Amount = Original Price × (Discount Percentage ÷ 100)</strong>
+        </p>
+        <p>
+          <strong>Final Price = Original Price − Discount Amount</strong>
+        </p>
+
+        <h2>Practical discount calculation example</h2>
+        <p>
+          Imagine a product costs KES 2,000 and a shop offers
+          a 15% discount.
+        </p>
+        <ul>
+          <li>Original price: KES 2,000</li>
+          <li>Discount percentage: 15%</li>
+          <li>Amount saved: KES 300</li>
+          <li>Final price: KES 1,700</li>
+        </ul>
+
+        <h2>How to use this discount calculator</h2>
+        <ol>
+          <li>Enter the original price of the product.</li>
+          <li>Enter the discount percentage.</li>
+          <li>Select your preferred display currency.</li>
+          <li>View your savings and the final discounted price.</li>
+        </ol>
+
+        <h2>Frequently asked questions</h2>
+
+        <h3>How do I calculate 10% off a price?</h3>
+        <p>
+          Multiply the original price by 0.10 to find the
+          discount amount, then subtract that amount from
+          the original price.
+        </p>
+
+        <h3>How do I calculate a 20% discount?</h3>
+        <p>
+          Multiply the original price by 0.20. For example,
+          a KES 1,000 product has a KES 200 discount, leaving
+          a final price of KES 800.
+        </p>
+
+        <h3>Can a discount be 100%?</h3>
+        <p>
+          Yes. A 100% discount means the customer pays nothing
+          because the entire original price has been deducted.
+        </p>
+
+        <h3>Can businesses use this calculator?</h3>
+        <p>
+          Yes. Retailers, online sellers, wholesalers, and
+          small business owners can use it to calculate
+          promotional prices and customer savings.
+        </p>
+      </section>
+    </>
+  );
+}
+
+
+  
+if (id === "break-even") {
+  const fixed = n("fixed", 50000);
+  const price = n("price", 500);
+  const variable = n("variable", 250);
+  const contribution = price - variable;
+  const units = contribution > 0 ? Math.ceil(fixed / contribution) : null;
+
+  return (
+    <>
       <CalculatorShell
         title="Break-even calculator"
-        intro="Estimate the sales volume needed to cover your costs."
+        intro="Calculate how many units your business needs to sell to cover all its costs without making a loss or profit."
       >
         <NumberField
           label="Fixed costs"
@@ -229,22 +461,100 @@ export function Calculator({ id, currency }) {
           </p>
         )}
       </CalculatorShell>
-    );
-  }
 
-  const amount = n("amount", 1000);
-  const rate = Math.max(0, n("rate", 16));
-  const vat =
-    vatMode === "add"
-      ? (amount * rate) / 100
-      : amount - amount / (1 + rate / 100);
-  const total = vatMode === "add" ? amount + vat : amount;
-  const net = vatMode === "add" ? amount : amount - vat;
+      <section className="calculator-guide">
+        <h2>What is the break-even point?</h2>
+        <p>
+          The break-even point is the level of sales at which
+          total revenue equals total costs. At this point,
+          a business makes neither a profit nor a loss.
+        </p>
 
-  return (
+        <h2>Break-even calculation formula</h2>
+        <p>
+          First, calculate the contribution earned from selling
+          one unit. Then divide total fixed costs by that contribution.
+        </p>
+        <p>
+          <strong>Contribution per Unit = Selling Price − Variable Cost per Unit</strong>
+        </p>
+        <p>
+          <strong>Break-even Units = Fixed Costs ÷ Contribution per Unit</strong>
+        </p>
+
+        <h2>Practical break-even calculation example</h2>
+        <p>
+          Imagine a business has fixed costs of KES 50,000,
+          sells each product for KES 500, and spends KES 250
+          to produce each unit.
+        </p>
+        <ul>
+          <li>Fixed costs: KES 50,000</li>
+          <li>Selling price per unit: KES 500</li>
+          <li>Variable cost per unit: KES 250</li>
+          <li>Contribution per unit: KES 250</li>
+          <li>Break-even sales volume: 200 units</li>
+          <li>Break-even revenue: KES 100,000</li>
+        </ul>
+
+        <h2>How to use this break-even calculator</h2>
+        <ol>
+          <li>Enter your total fixed business costs.</li>
+          <li>Enter the selling price of one unit.</li>
+          <li>Enter the variable cost of producing or selling one unit.</li>
+          <li>View the contribution per unit and required sales volume.</li>
+        </ol>
+
+        <h2>Frequently asked questions</h2>
+
+        <h3>What are fixed costs?</h3>
+        <p>
+          Fixed costs are expenses that generally remain the same
+          regardless of production or sales volume, such as rent
+          and certain salaries.
+        </p>
+
+        <h3>What are variable costs?</h3>
+        <p>
+          Variable costs change with production or sales volume.
+          Examples include raw materials, packaging, and
+          production costs per unit.
+        </p>
+
+        <h3>Why is the break-even point important?</h3>
+        <p>
+          It helps business owners understand the minimum sales
+          required to cover costs, set sales targets, and evaluate
+          pricing decisions.
+        </p>
+
+        <h3>What happens after reaching break-even?</h3>
+        <p>
+          Additional sales can generate profit when the selling
+          price remains above variable cost and other assumptions
+          remain unchanged.
+        </p>
+      </section>
+    </>
+  );
+}
+
+
+  
+const amount = n("amount", 1000);
+const rate = Math.max(0, n("rate", 16));
+const vat =
+  vatMode === "add"
+    ? (amount * rate) / 100
+    : amount - amount / (1 + rate / 100);
+const total = vatMode === "add" ? amount + vat : amount;
+const net = vatMode === "add" ? amount : amount - vat;
+
+return (
+  <>
     <CalculatorShell
       title="VAT calculator"
-      intro="Add VAT to a net price or extract VAT from a VAT-inclusive total."
+      intro="Calculate value added tax by adding VAT to a price or extracting VAT from a VAT-inclusive total."
     >
       <div className="mode-switch" role="group" aria-label="VAT calculation mode">
         <button
@@ -260,29 +570,132 @@ export function Calculator({ id, currency }) {
           Extract VAT
         </button>
       </div>
+
       <NumberField
         label={vatMode === "add" ? "Price before VAT" : "Price including VAT"}
         value={values.amount ?? "1000"}
         onChange={set("amount")}
       />
+
       <NumberField
         label="VAT rate (%)"
         value={values.rate ?? "16"}
         onChange={set("rate")}
         hint="Enter the applicable rate for your country or transaction."
       />
+
       <div className="results">
         <Result label="Net amount" value={money(net, currency)} />
         <Result label="VAT amount" value={money(vat, currency)} />
         <Result label="Total including VAT" value={money(total, currency)} />
       </div>
+
       <p className="notice">
         Tax rates and exemptions vary by jurisdiction. Confirm the applicable
         rate before using this result for tax filings.
       </p>
     </CalculatorShell>
-  );
+
+    <section className="calculator-guide">
+      <h2>What is VAT?</h2>
+      <p>
+        Value Added Tax (VAT) is a consumption tax charged on
+        taxable goods and services. Businesses collect VAT on
+        taxable sales and account for it according to the tax
+        rules applicable in their jurisdiction.
+      </p>
+
+      <h2>How to calculate VAT</h2>
+      <p>
+        When adding VAT, multiply the price before VAT by the
+        VAT rate divided by 100.
+      </p>
+      <p>
+        <strong>VAT Amount = Net Price × (VAT Rate ÷ 100)</strong>
+      </p>
+      <p>
+        <strong>Total Price = Net Price + VAT Amount</strong>
+      </p>
+
+      <h2>How to extract VAT</h2>
+      <p>
+        If a price already includes VAT, divide the total price
+        by 1 plus the VAT rate expressed as a decimal to find
+        the original price before VAT.
+      </p>
+      <p>
+        <strong>Net Price = VAT-inclusive Price ÷ (1 + VAT Rate ÷ 100)</strong>
+      </p>
+      <p>
+        <strong>VAT Amount = VAT-inclusive Price − Net Price</strong>
+      </p>
+
+      <h2>Practical VAT calculation example</h2>
+      <p>
+        Assume a taxable product costs KES 1,000 before VAT
+        and an applicable VAT rate of 16% is used.
+      </p>
+      <ul>
+        <li>Price before VAT: KES 1,000</li>
+        <li>VAT rate: 16%</li>
+        <li>VAT amount: KES 160</li>
+        <li>Total including VAT: KES 1,160</li>
+      </ul>
+
+      <p>
+        If KES 1,160 already includes VAT at 16%, extracting
+        VAT gives a net price of KES 1,000 and VAT of KES 160.
+      </p>
+
+      <h2>How to use this VAT calculator</h2>
+      <ol>
+        <li>Select Add VAT or Extract VAT.</li>
+        <li>Enter the price before VAT or the VAT-inclusive price.</li>
+        <li>Enter the applicable VAT percentage.</li>
+        <li>Select your preferred display currency.</li>
+        <li>View the net amount, VAT amount, and total.</li>
+      </ol>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>What does VAT stand for?</h3>
+      <p>
+        VAT stands for Value Added Tax. It is a consumption
+        tax applied to taxable goods and services.
+      </p>
+
+      <h3>What is the VAT rate in Kenya?</h3>
+      <p>
+        Kenya's standard VAT rate is 16%. However, some goods
+        and services may have different tax treatment, including
+        zero-rating or exemption. Check the current Kenya
+        Revenue Authority guidance before applying a rate.
+      </p>
+
+      <h3>What is the difference between adding and extracting VAT?</h3>
+      <p>
+        Adding VAT calculates tax on a price that does not
+        include VAT. Extracting VAT separates the tax amount
+        from a price that already includes VAT.
+      </p>
+
+      <h3>Is VAT the same in every country?</h3>
+      <p>
+        No. VAT rates, exemptions, and rules differ between
+        countries. Always use the rate applicable to your
+        location and transaction.
+      </p>
+
+      <h3>Can businesses use this calculator?</h3>
+      <p>
+        Yes. Businesses, retailers, freelancers, and individuals
+        can use it to estimate VAT amounts and VAT-inclusive prices.
+      </p>
+    </section>
+  </>
+);
 }
+
 
 export function CalculatorShell({ title, intro, children }) {
   return (
