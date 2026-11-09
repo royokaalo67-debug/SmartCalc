@@ -1,6 +1,7 @@
 import About from "./About.jsx";
 import Privacy from "./Privacy.jsx";
 import Terms from "./Terms.jsx";
+import Contact from "./Contact.jsx";
 import React, { useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import CalculatorPage from "./CalculatorPage.jsx";
@@ -740,6 +741,10 @@ if (location.pathname === "/about") {
   return <About />;
 }
 
+if (location.pathname === "/contact") {
+  return <Contact />;
+}
+
 if (location.pathname === "/privacy-policy") {
   return <Privacy />;
 }
@@ -975,13 +980,12 @@ if (location.pathname === "/terms-and-conditions") {
         <p>Free tools for clearer everyday decisions.</p>
         <div className="footer-links">
   <Link to="/about">About</Link>
-  <a href="mailto:royokaalo67@gmail.com">Contact</a>
-  <Link to="/privacy-policy">Privacy</Link>
-  <Link to="/terms-and-conditions">Terms</Link>
+  <Link to="/contact">Contact</Link>
+<Link to="/privacy-policy">Privacy</Link>
+<Link to="/terms-and-conditions">Terms</Link>
 </div>
         <small>
           © {new Date().getFullYear()} SmartCalc. All rights reserved.
-          Replace placeholder contact and policy links before launch.
         </small>
       </footer>
     </div>
