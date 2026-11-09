@@ -1,0 +1,34 @@
+
+import React, { useEffect } from "react";
+
+export default function CalculatorPage({ title, description, children }) {
+  useEffect(() => {
+    document.title = `${title} | SmartCalc`;
+
+    let meta = document.querySelector('meta[name="description"]');
+
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+
+    meta.content = description;
+  }, [title, description]);
+
+  return (
+    <main>
+      <section className="workspace calculator-page">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">SMARTCALC TOOLS</p>
+            <h1>{title}</h1>
+            <p>{description}</p>
+          </div>
+        </div>
+
+        {children}
+      </section>
+    </main>
+  );
+}
