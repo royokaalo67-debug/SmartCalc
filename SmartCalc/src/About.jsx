@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   return (
-    <main>
+    <main className="page-transition">
       <section className="workspace">
         <div className="section-heading">
           <div>

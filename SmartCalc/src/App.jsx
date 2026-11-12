@@ -820,7 +820,7 @@ if (location.pathname === "/terms-and-conditions") {
         {currencyPicker}
       </header>
 
-      <main>
+      <main className="page-transition">
         <section className="hero">
           <div className="hero-copy">
             <span className="hero-tag">

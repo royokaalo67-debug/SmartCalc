@@ -17,7 +17,7 @@ export default function CalculatorPage({ title, description, children }) {
   }, [title, description]);
 
   return (
-    <main>
+    <main className="page-transition">
       <section className="workspace calculator-page">
         <div className="section-heading">
           <div>
