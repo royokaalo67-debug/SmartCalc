@@ -1,5 +1,6 @@
 import Contact from "./Contact.jsx";
 import InvoiceGenerator from "./InvoiceGenerator.jsx";
+import ExpenseTracker from "./ExpenseTracker.jsx";
 import About from "./About.jsx";
 import Privacy from "./Privacy.jsx";
 import Terms from "./Terms.jsx";
@@ -866,6 +867,30 @@ if (location.pathname === "/invoice-generator") {
   );
 }
 
+if (location.pathname === "/expense-tracker") {
+  return (
+    <div className="app">
+      <header className="topbar">
+        <Link className="brand" to="/">
+          <span className="brand-mark">S</span>
+          <span>
+            Smart<span className="brand-accent">Calc</span>
+          </span>
+        </Link>
+      </header>
+
+      <main className="page-transition">
+        <ExpenseTracker />
+      </main>
+
+      <footer className="footer">
+        <p>© {new Date().getFullYear()} SmartCalc. All rights reserved.</p>
+        <Link to="/">Back to Home</Link>
+      </footer>
+    </div>
+  );
+}
+
 if (location.pathname === "/terms-and-conditions") {
   return <Terms />;
 }
@@ -932,6 +957,7 @@ if (location.pathname === "/terms-and-conditions") {
         <nav>
   <a href="#calculators">Calculators</a>
   <Link to="/invoice-generator">Invoice Generator</Link>
+  <Link to="/expense-tracker">Expense Tracker</Link>
   <Link to="/about">About</Link>
 </nav>
 
