@@ -13,6 +13,7 @@ export const calculators = [
   { id: "discount", name: "Discount calculator", short: "Find the savings and final price after a discount.", icon: "↓", category: "Shopping" },
   { id: "break-even", name: "Break-even calculator", short: "Find how many units you need to sell to cover costs.", icon: "⚖", category: "Business" },
   { id: "vat", name: "VAT calculator", short: "Add VAT to a price or extract VAT from a total.", icon: "▤", category: "Tax" },
+  { id: "stock-profit", name: "Stock profit calculator", short: "Calculate stock investment, sales revenue and profit.", icon: "📦", category: "Business" },
 ];
 
 const pageRoutes = {
@@ -21,6 +22,7 @@ const pageRoutes = {
   "/discount-calculator": "discount",
   "/break-even-calculator": "break-even",
   "/vat-calculator": "vat",
+  "/stock-profit-calculator": "stock-profit",
 };
 
 const pageUrl = {
@@ -29,6 +31,7 @@ const pageUrl = {
   discount: "/discount-calculator",
   "break-even": "/break-even-calculator",
   vat: "/vat-calculator",
+  "stock-profit": "/stock-profit-calculator",
 };
 
 const money = (value, currency) =>
@@ -543,6 +546,96 @@ if (id === "break-even") {
 
 
   
+// STOCK PROFIT CALCULATOR
+if (id === "stock-profit") {
+  const quantity = n("stockQuantity", 10);
+  const purchasePrice = n("purchasePrice", 500);
+  const expenses = n("stockExpenses", 0);
+  const sellingPrice = n("sellingPrice", 700);
+
+  const totalPurchaseCost = quantity * purchasePrice;
+  const totalInvestment = totalPurchaseCost + expenses;
+  const revenue = quantity * sellingPrice;
+  const profit = revenue - totalInvestment;
+  const profitMargin = revenue > 0 ? (profit / revenue) * 100 : 0;
+  const breakEvenPrice = quantity > 0 ? totalInvestment / quantity : 0;
+  const profitPerUnit = quantity > 0 ? profit / quantity : 0;
+
+  return (
+    <>
+      <CalculatorShell
+        title="Stock Profit Calculator"
+        intro="Calculate your stock investment, expected sales revenue and profit."
+      >
+        <NumberField
+          label="Quantity of products purchased"
+          value={values.stockQuantity ?? "10"}
+          onChange={set("stockQuantity")}
+          min="1"
+          step="1"
+        />
+
+        <NumberField
+          label="Purchase price per unit"
+          value={values.purchasePrice ?? "500"}
+          onChange={set("purchasePrice")}
+        />
+
+        <NumberField
+          label="Additional expenses"
+          value={values.stockExpenses ?? "0"}
+          onChange={set("stockExpenses")}
+          hint="Transport, packaging and other stock-related costs."
+        />
+
+        <NumberField
+          label="Selling price per unit"
+          value={values.sellingPrice ?? "700"}
+          onChange={set("sellingPrice")}
+        />
+
+        <div className="results">
+          <Result
+            label="Total purchase cost"
+            value={money(totalPurchaseCost, currency)}
+          />
+          <Result
+            label="Total investment"
+            value={money(totalInvestment, currency)}
+          />
+          <Result
+            label="Expected sales revenue"
+            value={money(revenue, currency)}
+          />
+          <Result
+            label="Total profit"
+            value={money(profit, currency)}
+          />
+          <Result
+            label="Profit per unit"
+            value={money(profitPerUnit, currency)}
+          />
+          <Result
+            label="Profit margin"
+            value={`${profitMargin.toFixed(2)}%`}
+          />
+          <Result
+            label="Break-even selling price per unit"
+            value={money(breakEvenPrice, currency)}
+          />
+        </div>
+
+        {profit < 0 && (
+          <p className="notice warning">
+            Your selling price is too low to cover your total stock costs.
+            You are making a loss.
+          </p>
+        )}
+      </CalculatorShell>
+    </>
+  );
+}
+
 const amount = n("amount", 1000);
 const rate = Math.max(0, n("rate", 16));
 const vat =
@@ -697,7 +790,6 @@ return (
   </>
 );
 }
-
 
 export function CalculatorShell({ title, intro, children }) {
   return (
