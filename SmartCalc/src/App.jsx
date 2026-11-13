@@ -1,7 +1,8 @@
+import Contact from "./Contact.jsx";
+import InvoiceGenerator from "./InvoiceGenerator.jsx";
 import About from "./About.jsx";
 import Privacy from "./Privacy.jsx";
 import Terms from "./Terms.jsx";
-import Contact from "./Contact.jsx";
 import React, { useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import CalculatorPage from "./CalculatorPage.jsx";
@@ -749,6 +750,30 @@ if (location.pathname === "/privacy-policy") {
   return <Privacy />;
 }
 
+if (location.pathname === "/invoice-generator") {
+  return (
+    <div className="app">
+      <header className="topbar">
+        <Link className="brand" to="/">
+          <span className="brand-mark">S</span>
+          <span>
+            Smart<span className="brand-accent">Calc</span>
+          </span>
+        </Link>
+      </header>
+
+      <main className="page-transition">
+        <InvoiceGenerator />
+      </main>
+
+      <footer className="footer">
+        <p>© {new Date().getFullYear()} SmartCalc. All rights reserved.</p>
+        <Link to="/">Back to Home</Link>
+      </footer>
+    </div>
+  );
+}
+
 if (location.pathname === "/terms-and-conditions") {
   return <Terms />;
 }
@@ -813,9 +838,10 @@ if (location.pathname === "/terms-and-conditions") {
         </Link>
 
         <nav>
-          <a href="#calculators">Calculators</a>
-          <Link to="/about">About</Link>
-        </nav>
+  <a href="#calculators">Calculators</a>
+  <Link to="/invoice-generator">Invoice Generator</Link>
+  <Link to="/about">About</Link>
+</nav>
 
         {currencyPicker}
       </header>
