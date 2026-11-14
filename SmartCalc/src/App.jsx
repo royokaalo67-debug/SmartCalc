@@ -989,7 +989,8 @@ export default function App() {
   const selected =
     calculators.find((c) => c.id === active) ?? calculators[0];
 
-  const pageId = pageRoutes[location.pathname];
+  const normalizedPath = location.pathname.replace(/\/+$/, "") || "/";
+const pageId = pageRoutes[normalizedPath];
 const pageTool = calculators.find((tool) => tool.id === pageId);
 
 if (location.pathname === "/about") {
