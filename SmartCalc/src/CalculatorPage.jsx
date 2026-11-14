@@ -1,7 +1,12 @@
 
 import React, { useEffect } from "react";
 
-export default function CalculatorPage({ title, description, children }) {
+export default function CalculatorPage({
+  title,
+  description,
+  canonicalPath,
+  children,
+}) {
   useEffect(() => {
     document.title = `${title} | SmartCalc`;
 
@@ -14,7 +19,25 @@ export default function CalculatorPage({ title, description, children }) {
     }
 
     meta.content = description;
-  }, [title, description]);
+
+    let canonical = document.querySelector(
+      'link[rel="canonical"]'
+    );
+
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+
+    canonical.href = canonicalPath
+      ? `https://smartcalc-55t.pages.dev${canonicalPath}`
+      : window.location.origin + window.location.pathname;
+
+    return () => {
+      canonical.remove();
+    };
+  }, [title, description, canonicalPath]);
 
   return (
     <main className="page-transition">

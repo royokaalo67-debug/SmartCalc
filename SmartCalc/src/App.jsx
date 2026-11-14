@@ -1088,9 +1088,10 @@ if (location.pathname === "/terms-and-conditions") {
         </header>
 
         <CalculatorPage
-          title={pageTool.name}
-          description={pageTool.short}
-        >
+  title={pageTool.name}
+  description={pageTool.short}
+  canonicalPath={pageUrl[pageTool.id]}
+>
           <Calculator id={pageTool.id} currency={currency} />
           <p>
             <Link to="/">← Back to all calculators</Link>
