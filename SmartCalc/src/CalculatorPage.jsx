@@ -8,17 +8,82 @@ export default function CalculatorPage({
   children,
 }) {
   useEffect(() => {
-    document.title = `${title} | SmartCalc`;
+    const pageTitle = `${title} | SmartCalc`;
+    const pageUrl = canonicalPath
+      ? `https://smartcalc-55t.pages.dev${canonicalPath}`
+      : window.location.origin + window.location.pathname;
 
-    let meta = document.querySelector('meta[name="description"]');
+    document.title = pageTitle;
 
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.name = "description";
-      document.head.appendChild(meta);
-    }
+    const updateMeta = (selector, attribute, value, createTag) => {
+      let element = document.querySelector(selector);
 
-    meta.content = description;
+      if (!element) {
+        element = document.createElement("meta");
+        Object.entries(createTag).forEach(([key, val]) => {
+          element.setAttribute(key, val);
+        });
+        document.head.appendChild(element);
+      }
+
+      element.setAttribute(attribute, value);
+    };
+
+    updateMeta(
+      'meta[name="description"]',
+      "content",
+      description,
+      { name: "description" }
+    );
+
+    updateMeta(
+      'meta[property="og:type"]',
+      "content",
+      "website",
+      { property: "og:type" }
+    );
+
+    updateMeta(
+      'meta[property="og:title"]',
+      "content",
+      pageTitle,
+      { property: "og:title" }
+    );
+
+    updateMeta(
+      'meta[property="og:description"]',
+      "content",
+      description,
+      { property: "og:description" }
+    );
+
+    updateMeta(
+      'meta[property="og:url"]',
+      "content",
+      pageUrl,
+      { property: "og:url" }
+    );
+
+    updateMeta(
+      'meta[name="twitter:card"]',
+      "content",
+      "summary",
+      { name: "twitter:card" }
+    );
+
+    updateMeta(
+      'meta[name="twitter:title"]',
+      "content",
+      pageTitle,
+      { name: "twitter:title" }
+    );
+
+    updateMeta(
+      'meta[name="twitter:description"]',
+      "content",
+      description,
+      { name: "twitter:description" }
+    );
 
     let canonical = document.querySelector(
       'link[rel="canonical"]'
@@ -30,9 +95,7 @@ export default function CalculatorPage({
       document.head.appendChild(canonical);
     }
 
-    canonical.href = canonicalPath
-      ? `https://smartcalc-55t.pages.dev${canonicalPath}`
-      : window.location.origin + window.location.pathname;
+    canonical.href = pageUrl;
 
     return () => {
       canonical.remove();
