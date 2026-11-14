@@ -15,6 +15,7 @@ export const calculators = [
   { id: "break-even", name: "Break-even calculator", short: "Find how many units you need to sell to cover costs.", icon: "⚖", category: "Business" },
   { id: "vat", name: "VAT calculator", short: "Add VAT to a price or extract VAT from a total.", icon: "▤", category: "Tax" },
   { id: "stock-profit", name: "Stock profit calculator", short: "Calculate stock investment, sales revenue and profit.", icon: "📦", category: "Business" },
+  { id: "sales-target", name: "Sales target calculator", short: "Calculate the sales and units needed to reach your business target.", icon: "🎯", category: "Business" },
 ];
 
 const pageRoutes = {
@@ -24,6 +25,7 @@ const pageRoutes = {
   "/break-even-calculator": "break-even",
   "/vat-calculator": "vat",
   "/stock-profit-calculator": "stock-profit",
+  "/sales-target-calculator": "sales-target",
 };
 
 const pageUrl = {
@@ -33,6 +35,7 @@ const pageUrl = {
   "break-even": "/break-even-calculator",
   vat: "/vat-calculator",
   "stock-profit": "/stock-profit-calculator",
+  "sales-target": "/sales-target-calculator",
 };
 
 const money = (value, currency) =>
@@ -636,6 +639,164 @@ if (id === "stock-profit") {
     </>
   );
 }
+
+
+if (id === "sales-target") {
+  const target = n("target", 100000);
+  const averagePrice = n("averagePrice", 1000);
+  const days = n("days", 30);
+  const achieved = n("achieved", 25000);
+
+  const remaining = Math.max(target - achieved, 0);
+  const unitsRequired =
+    averagePrice > 0 ? Math.ceil(remaining / averagePrice) : 0;
+  const dailyRevenue = days > 0 ? remaining / days : 0;
+  const dailyUnits =
+    days > 0 ? Math.ceil(unitsRequired / days) : 0;
+  const progress =
+    target > 0 ? Math.min((achieved / target) * 100, 100) : 0;
+
+  return (
+    <CalculatorShell
+      title="Sales target calculator"
+      intro="Calculate how much your business needs to sell daily and how many units are required to reach your sales target."
+    >
+      <NumberField
+        label="Sales target"
+        value={values.target ?? "100000"}
+        onChange={set("target")}
+        hint="Your total revenue goal for the period."
+      />
+
+      <NumberField
+        label="Average selling price per unit"
+        value={values.averagePrice ?? "1000"}
+        onChange={set("averagePrice")}
+        hint="Average amount received for one unit."
+      />
+
+      <NumberField
+        label="Number of selling days"
+        value={values.days ?? "30"}
+        onChange={set("days")}
+        step="1"
+        hint="Number of days available to reach your target."
+      />
+
+      <NumberField
+        label="Sales already achieved"
+        value={values.achieved ?? "25000"}
+        onChange={set("achieved")}
+        hint="Revenue already generated during this period."
+      />
+
+      <div className="results">
+        <Result
+          label="Remaining sales revenue"
+          value={money(remaining, currency)}
+        />
+        <Result
+          label="Units still required"
+          value={unitsRequired.toLocaleString()}
+        />
+        <Result
+          label="Daily revenue target"
+          value={money(dailyRevenue, currency)}
+        />
+        <Result
+          label="Daily units target"
+          value={dailyUnits.toLocaleString()}
+        />
+        <Result
+          label="Target achieved"
+          value={`${progress.toFixed(1)}%`}
+        />
+      </div>
+
+      {achieved >= target && target > 0 && (
+        <p className="notice">
+          Congratulations! You have reached your sales target.
+        </p>
+      )}
+
+      {averagePrice <= 0 && (
+        <p className="notice">
+          Enter an average selling price greater than zero to calculate units.
+        </p>
+      )}
+
+      {days <= 0 && (
+        <p className="notice">
+          Enter at least one selling day to calculate daily targets.
+        </p>
+      )}
+    </CalculatorShell>
+  );
+}
+
+
+if (id === "sales-target") {
+  const target = n("target", 100000);
+  const averagePrice = n("averagePrice", 1000);
+  const days = n("days", 30);
+  const achieved = n("achieved", 25000);
+
+  const remaining = Math.max(target - achieved, 0);
+  const unitsRequired =
+    averagePrice > 0 ? Math.ceil(remaining / averagePrice) : 0;
+  const dailyRevenue = days > 0 ? remaining / days : 0;
+  const dailyUnits =
+    days > 0 ? Math.ceil(unitsRequired / days) : 0;
+  const progress =
+    target > 0 ? Math.min((achieved / target) * 100, 100) : 0;
+
+  return (
+    <CalculatorShell
+      title="Sales Target Calculator"
+      intro="Calculate how much your business needs to sell daily and how many units are required to reach your sales target."
+    >
+      <NumberField
+        label="Sales target"
+        value={values.target ?? "100000"}
+        onChange={set("target")}
+      />
+
+      <NumberField
+        label="Average selling price per unit"
+        value={values.averagePrice ?? "1000"}
+        onChange={set("averagePrice")}
+      />
+
+      <NumberField
+        label="Number of selling days"
+        value={values.days ?? "30"}
+        onChange={set("days")}
+        step="1"
+      />
+
+      <NumberField
+        label="Sales already achieved"
+        value={values.achieved ?? "25000"}
+        onChange={set("achieved")}
+      />
+
+      <div className="results">
+        <Result label="Remaining sales revenue" value={money(remaining, currency)} />
+        <Result label="Units still required" value={unitsRequired.toLocaleString()} />
+        <Result label="Daily revenue target" value={money(dailyRevenue, currency)} />
+        <Result label="Daily units target" value={dailyUnits.toLocaleString()} />
+        <Result label="Target achieved" value={`${progress.toFixed(1)}%`} />
+      </div>
+
+      {achieved >= target && target > 0 && (
+        <p className="notice">
+          Congratulations! You have reached your sales target.
+        </p>
+      )}
+    </CalculatorShell>
+  );
+}
+
 
 const amount = n("amount", 1000);
 const rate = Math.max(0, n("rate", 16));
