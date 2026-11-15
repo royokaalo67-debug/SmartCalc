@@ -10,8 +10,8 @@ export default function CalculatorPage({
   useEffect(() => {
     const pageTitle = `${title} | SmartCalc`;
     const pageUrl = canonicalPath
-      ? `https://smartcalc-55t.pages.dev${canonicalPath}`
-      : window.location.origin + window.location.pathname;
+  ? `https://smartcalc-55t.pages.dev${canonicalPath.replace(/\/+$/, "")}/`
+  : window.location.origin + window.location.pathname;
 
     document.title = pageTitle;
 

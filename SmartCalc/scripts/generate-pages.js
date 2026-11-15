@@ -61,7 +61,7 @@ for (const page of pages) {
 
   const title = escapeHtml(page.title);
   const description = escapeHtml(page.description);
-  const url = `https://smartcalc-55t.pages.dev/${page.route}`;
+  const url = `https://smartcalc-55t.pages.dev/${page.route}/`;
 
   html = html.replace(
     /<title>.*?<\/title>/i,
