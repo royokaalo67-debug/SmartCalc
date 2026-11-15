@@ -46,10 +46,14 @@ const money = (value, currency) =>
   }).format(Number.isFinite(value) ? value : 0);
 
 function NumberField({ label, value, onChange, min = "0", step = "any", hint }) {
+  const fieldId = label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
   return (
-    <label className="field">
+    <label className="field" htmlFor={fieldId}>
       <span>{label}</span>
       <input
+        id={fieldId}
+        name={fieldId}
         type="number"
         min={min}
         step={step}
@@ -1061,7 +1065,9 @@ if (location.pathname === "/terms-and-conditions") {
     <label className="currency-picker">
       <span>Currency</span>
       <select
-        value={currency}
+  id="display-currency"
+  name="displayCurrency"
+  value={currency}
         onChange={(e) => setCurrency(e.target.value)}
         aria-label="Display currency"
       >
@@ -1196,7 +1202,10 @@ if (location.pathname === "/terms-and-conditions") {
             <div className="search-box">
               <span>⌕</span>
               <input
-                value={search}
+  id="calculator-search"
+  name="calculatorSearch"
+  type="search"
+  value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Find a calculator..."
                 aria-label="Find a calculator"
